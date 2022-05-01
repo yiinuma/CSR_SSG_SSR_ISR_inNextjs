@@ -1,6 +1,5 @@
 import { useCallback, useState } from 'react';
 import { useMutation } from 'react-query';
-
 import { axiosInstance } from 'lib/axiosInstance';
 import jwtDecode from 'jwt-decode';
 import { useRouter } from 'next/router';
