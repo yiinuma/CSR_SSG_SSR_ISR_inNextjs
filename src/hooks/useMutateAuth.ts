@@ -10,6 +10,7 @@ import { authState } from 'store/authState';
 
 type AxiosType = {
   access_token: string;
+  error?: string;
 };
 
 type AxiosExpType = {
@@ -21,17 +22,22 @@ type AxiosExpType = {
 export const useMutateAuth = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const reset = () => {
-    setEmail('');
-    setPassword('');
-  };
   const router = useRouter();
   const setAuth = useSetRecoilState<boolean>(authState);
   const { loginInstance } = axiosInstance();
 
+  const reset = () => {
+    setEmail('');
+    setPassword('');
+  };
+
   const loginMutation = useMutation(
     async () => {
-      const { data } = await loginInstance.post<AxiosType>('login', { email, password });
+      const { data, status } = await loginInstance.post<AxiosType>('login', {
+        email,
+        password,
+      });
+      if (status === 401) return;
       const decodedToken = jwtDecode<AxiosExpType>(data.access_token);
       localStorage.setItem('auth', JSON.stringify(true));
       localStorage.setItem('token', data.access_token);
