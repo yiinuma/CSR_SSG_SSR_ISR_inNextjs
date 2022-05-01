@@ -1,25 +1,16 @@
+import { CustomLink } from 'components/CustomLink';
 import Link from 'next/link';
 
 export const Navbar = () => {
   return (
-    <nav className='w-screen bg-lime-600 font-mono'>
+    <nav className='w-screen bg-primary-600 font-mono'>
       <div className='flex h-12 items-center pl-4'>
         <div className='flex space-x-1 text-sm'>
-          <Link href='/'>
-            <a className='rounded px-3 py-2 text-white hover:bg-lime-500'>Home</a>
-          </Link>
-          <Link href='/memo'>
-            <a className='rounded px-3 py-2 text-white hover:bg-lime-500'>Memo_App(CSR)</a>
-          </Link>
-          <Link href='/ssg'>
-            <a className='rounded px-3 py-2 text-white hover:bg-lime-500'>SSG</a>
-          </Link>
-          <Link href='/ssr'>
-            <a className='rounded px-3 py-2 text-white hover:bg-lime-500'>SSR</a>
-          </Link>
-          <Link href='/isr'>
-            <a className='rounded px-3 py-2 text-white hover:bg-lime-500'>ISR</a>
-          </Link>
+          <CustomLink href='/'>Home</CustomLink>
+          <CustomLink href='/memo-app'>Memo_App(CSR)</CustomLink>
+          <CustomLink href='/ssg'>SSG</CustomLink>
+          <CustomLink href='/ssr'>SSR</CustomLink>
+          <CustomLink href='/isr'>ISR</CustomLink>
         </div>
       </div>
     </nav>

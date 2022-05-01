@@ -7,14 +7,17 @@ import { InputField } from 'components/InputField';
 import { useMutateAuth } from 'hooks/useMutateAuth';
 import { useRecoilState } from 'recoil';
 import { authState } from 'store/authState';
+import { PrimaryButton } from 'components/button/PrimaryButton';
+import { useRouter } from 'next/router';
 
 const Home: NextPage = () => {
-  const { email, setEmail, password, setPassword, loginMutation } = useMutateAuth();
+  const { email, setEmail, password, setPassword, loginMutation, logout } = useMutateAuth();
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     loginMutation.mutate();
   };
   const [auth, setAuth] = useRecoilState<boolean>(authState);
+  const router = useRouter();
 
   useEffect(() => {
     const localExp = Number(localStorage.getItem('exp'));
@@ -23,6 +26,8 @@ const Home: NextPage = () => {
       const exp = new Date(localExp * 1000);
       setAuth(true);
       console.log('セッション有効期限', exp);
+    } else {
+      router.push('/');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -65,17 +70,15 @@ const Home: NextPage = () => {
                   />
                 </InputField>
                 <div className='mt-4 flex items-center justify-center'>
-                  <button
-                    className='text-md border-blue rounded border bg-blue-700 py-2 px-4 text-white hover:bg-blue-500 focus:border-black focus:outline-none'
-                    value='Login'
-                  >
-                    Login
-                  </button>
+                  <PrimaryButton>Login</PrimaryButton>
                 </div>
               </form>
             </div>
           ) : (
-            <div className='mx-16'>Login中です</div>
+            <div className='flex flex-col items-center gap-y-4'>
+              <div className='mx-16'>Login is in progress</div>
+              <PrimaryButton onClick={logout}>Logout</PrimaryButton>
+            </div>
           )}
         </div>
       </figure>
