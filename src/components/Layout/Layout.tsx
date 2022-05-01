@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 import { FC, memo, ReactNode } from 'react';
-import { Navbar } from './Navbar';
+import { Navbar } from '../Navbar';
 
 type Props = {
   readonly children: ReactNode;

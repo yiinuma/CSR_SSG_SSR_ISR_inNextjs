@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import { FormEvent, useEffect } from 'react';
 
-import { Layout } from 'components/Layout';
+import { Layout } from 'components/Layout/Layout';
 import { LoginInput } from 'components/input/LoginInput';
 import { InputField } from 'components/InputField';
 import { useMutateAuth } from 'hooks/useMutateAuth';
