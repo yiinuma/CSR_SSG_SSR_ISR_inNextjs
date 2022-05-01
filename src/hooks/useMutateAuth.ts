@@ -2,11 +2,11 @@ import { useCallback, useState } from 'react';
 import { useMutation } from 'react-query';
 
 import { axiosInstance } from 'lib/axiosInstance';
-import toast from 'react-hot-toast';
 import jwtDecode from 'jwt-decode';
 import { useRouter } from 'next/router';
-import { authState } from 'store/authState';
 import { useSetRecoilState } from 'recoil';
+
+import { authState } from 'store/authState';
 
 type AxiosType = {
   access_token: string;
@@ -27,27 +27,27 @@ export const useMutateAuth = () => {
   };
   const router = useRouter();
   const setAuth = useSetRecoilState<boolean>(authState);
+  const { loginInstance } = axiosInstance();
 
-  const login = async () => {
-    const { loginInstance } = axiosInstance();
-    const { data } = await loginInstance.post<AxiosType>('login', { email, password });
-    const decodedToken = jwtDecode<AxiosExpType>(data.access_token);
-    localStorage.setItem('auth', JSON.stringify(true));
-    localStorage.setItem('token', data.access_token);
-    localStorage.setItem('exp', JSON.stringify(decodedToken.exp));
-    setAuth(true);
-    return data;
-  };
-
-  const loginMutation = useMutation(login, {
-    onSuccess: () => {
-      reset();
+  const loginMutation = useMutation(
+    async () => {
+      const { data } = await loginInstance.post<AxiosType>('login', { email, password });
+      const decodedToken = jwtDecode<AxiosExpType>(data.access_token);
+      localStorage.setItem('auth', JSON.stringify(true));
+      localStorage.setItem('token', data.access_token);
+      localStorage.setItem('exp', JSON.stringify(decodedToken.exp));
+      setAuth(true);
     },
-    onError: (err: any) => {
-      alert(err.message);
-      reset();
+    {
+      onSuccess: () => {
+        reset();
+      },
+      onError: (err: any) => {
+        alert(err.message);
+        reset();
+      },
     },
-  });
+  );
 
   const logout = useCallback(() => {
     setAuth(false);
