@@ -7,7 +7,7 @@ export const Navbar = () => {
       <div className='flex h-12 items-center pl-4'>
         <div className='flex space-x-1 text-sm'>
           <CustomLink href='/'>Home</CustomLink>
-          <CustomLink href='/memo-app'>Memo_App(CSR)</CustomLink>
+          <CustomLink href='/memo-app'>Memo-App(CSR)</CustomLink>
           <CustomLink href='/ssg'>SSG</CustomLink>
           <CustomLink href='/ssr'>SSR</CustomLink>
           <CustomLink href='/isr'>ISR</CustomLink>

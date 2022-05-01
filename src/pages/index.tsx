@@ -25,7 +25,7 @@ const Home: NextPage = () => {
     if (localExp >= new Date().getTime() / 1000 && localAuth) {
       const exp = new Date(localExp * 1000);
       setAuth(true);
-      console.log('セッション有効期限', exp);
+      // console.log('セッション有効期限', exp);
     } else {
       router.push('/');
     }
