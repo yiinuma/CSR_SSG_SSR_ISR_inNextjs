@@ -15,7 +15,7 @@ export const Modal: FC = memo(() => {
   const [editDescription, setEditDescription] = useState('');
   const [modal, setModal] = useRecoilState(modalState);
   const [editIndex, setEditIndex] = useRecoilState(editIndexState);
-  const { updateMemoMutation, updateLoading } = useMutateMemo();
+  const { updateMemoMutation } = useMutateMemo();
   const { data: memos } = useQueryMemos();
 
   useEffect(() => {
