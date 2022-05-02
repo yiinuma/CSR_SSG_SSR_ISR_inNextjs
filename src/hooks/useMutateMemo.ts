@@ -16,7 +16,7 @@ export const useMutateMemo = () => {
   const createMemoMutaion = useMutation(
     async (postData: CreateMemoType) => {
       setCreateLoading(true);
-      const { data, status } = await loginInstance.post('/memo', postData);
+      const { data, status } = await loginInstance.post<MemoType>('/memo', postData);
       if (status === 400 || status === 401) return;
       return data;
     },
@@ -39,7 +39,7 @@ export const useMutateMemo = () => {
   const updateMemoMutaion = useMutation(
     async (putData: MemoType) => {
       setUpdateLoading(true);
-      const { data, status } = await loginInstance.put(`/memo/${putData.id}`, putData);
+      const { data, status } = await loginInstance.put<MemoType>(`/memo/${putData.id}`, putData);
       if (status === 400 || status === 401) return;
       return data;
     },
@@ -65,7 +65,7 @@ export const useMutateMemo = () => {
   const deleteMemoMutaion = useMutation(
     async (id: string) => {
       setDeleteLoading(true);
-      const { data, status } = await loginInstance.delete(`/memo/${id}`);
+      const { data, status } = await loginInstance.delete<MemoType>(`/memo/${id}`);
       if (status === 400 || status === 401) return;
       return data;
     },

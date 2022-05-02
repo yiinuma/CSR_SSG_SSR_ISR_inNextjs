@@ -11,22 +11,20 @@ import { useQueryMemos } from 'hooks/useQueryMemos';
 import { Spinner } from 'components/Spinner';
 
 type Props = {
+  index: number;
   id: string;
   title: string;
   category: string;
   description: string;
   date: string;
   mark_div: boolean;
-  index: number;
-  key: string;
 };
 
 export const TodoItem: FC<Props> = memo((props) => {
-  const { id, title, category, description, date, mark_div, index, key } = props;
+  const { id, title, category, description, date, mark_div, index } = props;
   const [modal, setModal] = useRecoilState(modalState);
   const setEditIndex = useSetRecoilState(editIndexState);
   const { updateMemoMutaion, deleteMemoMutaion, updateLoading, deleteLoading } = useMutateMemo();
-  const { status } = useQueryMemos();
 
   if (updateLoading || deleteLoading) return <Spinner />;
 
@@ -53,10 +51,7 @@ export const TodoItem: FC<Props> = memo((props) => {
   };
 
   return (
-    <li
-      className={`mb-2 w-full rounded ` + (mark_div ? ' bg-slate-200 opacity-60' : ' bg-white')}
-      key={id}
-    >
+    <li className={`mb-2 w-full rounded ` + (mark_div ? ' bg-slate-200 opacity-60' : ' bg-white')}>
       <div className='ml-auto mr-auto flex w-[100%] flex-col'>
         <div className='flex items-center'>
           <p
