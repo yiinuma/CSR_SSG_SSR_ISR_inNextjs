@@ -1,16 +1,16 @@
 import { useQuery } from 'react-query';
-import { EditedMemoType } from 'types/memo';
+import { EditedMemoType, MemoType } from 'types/memo';
 import { axiosInstance } from 'lib/axiosInstance';
 
 export const useQueryMemos = () => {
   const { loginInstance } = axiosInstance();
 
   const getMemos = async () => {
-    const { data } = await loginInstance.get('/memos', {});
+    const { data } = await loginInstance.get<MemoType[]>('/memos', {});
     return data;
   };
-  return useQuery<EditedMemoType[], Error>({
-    queryKey: ['memos'],
+  return useQuery<MemoType[], Error>({
+    queryKey: 'memos',
     queryFn: getMemos,
     staleTime: Infinity,
   });

@@ -23,7 +23,7 @@ export const TodoList: FC = memo(() => {
             category={list.category}
             description={list.description}
             date={list.date}
-            mark_div={list.mark_div}
+            mark_div={Boolean(list.mark_div)}
           />
         ))}
     </ul>

@@ -60,7 +60,7 @@ export const useMutateAuth = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('exp');
     localStorage.setItem('auth', JSON.stringify(false));
-    queryClient.removeQueries(['memos']);
+    queryClient.removeQueries('memos');
     router.push('/');
   }, [queryClient, router, setAuth]);
 
