@@ -1,27 +1,20 @@
 /* eslint-disable react/display-name */
-import { memo, useEffect, FC } from 'react';
+import { memo, FC } from 'react';
 import { FaEdit, FaCheck, FaTrashAlt } from 'react-icons/fa';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-// import { memoState } from '../store/memoState';
-import { useMemoCrud } from '../hooks/useMemoCrud';
-import { modalState } from '../store/modalState';
-import { ActionButton } from './button/ActionButton';
-import { editIndexState } from '../store/indexState';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+
+import { modalState } from 'store/modalState';
+import { ActionButton } from 'components/button/ActionButton';
+import { editIndexState } from 'store/indexState';
 import { useQueryMemos } from 'hooks/useQueryMemos';
 import { Spinner } from 'components/Spinner';
+import { useMutateMemo } from 'hooks/useMutateMemo';
 
 export const TodoList: FC = memo(() => {
-  const { readMemo, readLoading, upDateMemo, updateLoading, deleteMemo, deleteLoading } =
-    useMemoCrud();
-  // const memos = useRecoilValue(memoState);
   const [modal, setModal] = useRecoilState(modalState);
   const setEditIndex = useSetRecoilState(editIndexState);
   const { data: memos, status } = useQueryMemos();
-
-  useEffect(() => {
-    readMemo();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { updateMemoMutaion, deleteMemoMutaion } = useMutateMemo();
 
   if (status === 'loading') return <Spinner />;
   if (status === 'error') return <p>{'Error'}</p>;
@@ -35,11 +28,12 @@ export const TodoList: FC = memo(() => {
     complete: boolean,
   ) => {
     const completeChange = !complete;
-    upDateMemo(id, title, category, description, date, completeChange);
+    const newData = { id, title, category, description, date, mark_div: Number(completeChange) };
+    updateMemoMutaion.mutate(newData);
   };
 
   const handleDelete = (id: string) => {
-    deleteMemo(id);
+    deleteMemoMutaion.mutate(id);
   };
 
   const handleEdit = (index: number) => {
@@ -49,28 +43,21 @@ export const TodoList: FC = memo(() => {
 
   return (
     <ul className='todo-list mt-8 w-full'>
-      {(readLoading || updateLoading || deleteLoading) && (
-        <>
-          <div className='absolute top-[40%] left-[50%] z-20 translate-x-[-50%]'>
-            <div className='h-12 w-12 animate-spin rounded-xl bg-blue-300' />
-          </div>
-          <div className='absolute left-0 right-0 top-0 bottom-0 z-10 bg-slate-50 opacity-70' />
-        </>
-      )}
       {memos &&
         memos.map((list, index) => (
           <li
-            className={`mb-2 w-full rounded ${
-              list.mark_div ? ' bg-slate-200 opacity-60' : ' bg-white'
-            }`}
+            className={
+              `mb-2 w-full rounded ` + (list.mark_div ? ' bg-slate-200 opacity-60' : ' bg-white')
+            }
             key={list.id}
           >
             <div className='ml-auto mr-auto flex w-[100%] flex-col'>
               <div className='flex items-center'>
                 <p
-                  className={`break-words py-1 px-4 text-left font-semibold ${
-                    list.mark_div && 'line-through'
-                  } `}
+                  className={
+                    `break-words py-1 px-4 text-left font-semibold` +
+                    (list.mark_div && ` line-through`)
+                  }
                 >
                   {list.title}
                 </p>
@@ -80,7 +67,7 @@ export const TodoList: FC = memo(() => {
                   </span>
                 )}
               </div>
-              <p className={`break-words py-1 px-4 text-left ${list.mark_div && 'line-through'} `}>
+              <p className={`break-words py-1 px-4 text-left` + (list.mark_div && ' line-through')}>
                 {list.description}
               </p>
               <div className='flex w-full flex-row items-center justify-end rounded border-t border-slate-200 px-4 py-1'>
@@ -91,7 +78,7 @@ export const TodoList: FC = memo(() => {
                     handleEdit(index);
                   }}
                   CustomTag={FaEdit}
-                  disable={readLoading || updateLoading}
+                  // disable={readLoading || updateLoading}
                 />
                 <ActionButton
                   index={index}
@@ -107,7 +94,7 @@ export const TodoList: FC = memo(() => {
                     );
                   }}
                   CustomTag={FaCheck}
-                  disable={readLoading || updateLoading}
+                  // disable={readLoading || updateLoading}
                 />
                 <ActionButton
                   index={index}
@@ -116,7 +103,7 @@ export const TodoList: FC = memo(() => {
                     handleDelete(list.id);
                   }}
                   CustomTag={FaTrashAlt}
-                  disable={readLoading || updateLoading || deleteLoading}
+                  // disable={readLoading || updateLoading || deleteLoading}
                 />
               </div>
             </div>

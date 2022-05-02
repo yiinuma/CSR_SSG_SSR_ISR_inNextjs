@@ -6,7 +6,7 @@ type Props = {
   bg: string;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
   CustomTag: IconType;
-  disable: boolean;
+  disable?: boolean;
 };
 
 export const ActionButton: VFC<Props> = (props) => {

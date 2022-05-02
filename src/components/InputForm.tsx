@@ -2,16 +2,16 @@
 import { memo, useState, FC } from 'react';
 import dayjs from 'dayjs';
 
-import { useMemoCrud } from '../hooks/useMemoCrud';
 import { FormInput } from './input/FormInput';
 import { InputField } from './InputField';
+import { useMutateMemo } from 'hooks/useMutateMemo';
 
 export const InputForm: FC = memo(() => {
   const [title, setTitle] = useState<string>('');
   const [category, setCategory] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [submitDisabled, setSubmitDisabled] = useState(true);
-  const { createMemoMutaion } = useMemoCrud();
+  const { createMemoMutaion } = useMutateMemo();
 
   const getInputDay = () => {
     const inputDay = dayjs().format('YYYY/MM/DD');

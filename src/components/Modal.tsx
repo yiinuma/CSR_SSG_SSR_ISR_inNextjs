@@ -1,24 +1,25 @@
 /* eslint-disable react/display-name */
-import { memo, useEffect, useState, VFC } from 'react';
+import { memo, useEffect, useState, FC } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { useMemoCrud } from 'hooks/useMemoCrud';
-import { memoState } from 'store/memoState';
+
 import { editIndexState } from 'store/indexState';
 import { modalState } from 'store/modalState';
-import { ModalInput } from '../components/input/ModalInput';
-import { InputField } from '../components/InputField';
+import { ModalInput } from 'components/input/ModalInput';
+import { InputField } from 'components/InputField';
+import { useMutateMemo } from 'hooks/useMutateMemo';
+import { useQueryMemos } from 'hooks/useQueryMemos';
 
-export const Modal: VFC = memo(() => {
-  const memos = useRecoilValue(memoState);
-  const { upDateMemo } = useMemoCrud();
-
+export const Modal: FC = memo(() => {
   const [editTitle, setEditTitle] = useState('');
   const [editCategory, setEditCategory] = useState('');
   const [editDescription, setEditDescription] = useState('');
   const [modal, setModal] = useRecoilState(modalState);
   const [editIndex, setEditIndex] = useRecoilState(editIndexState);
+  const { updateMemoMutaion } = useMutateMemo();
+  const { data: memos } = useQueryMemos();
+
   useEffect(() => {
-    if (editIndex !== null) {
+    if (editIndex !== null && memos) {
       setEditTitle(memos[editIndex].title);
       setEditCategory(memos[editIndex].category);
       setEditDescription(memos[editIndex].description);
@@ -35,15 +36,16 @@ export const Modal: VFC = memo(() => {
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    if (editIndex === null) return;
-    upDateMemo(
-      memos[editIndex].id,
-      editTitle,
-      editCategory,
-      editDescription,
-      memos[editIndex].date,
-      Boolean(memos[editIndex].mark_div),
-    );
+    if (editIndex === null || memos === undefined) return;
+    const newData = {
+      id: memos[editIndex].id,
+      title: editTitle,
+      category: editCategory,
+      description: editDescription,
+      date: memos[editIndex].date,
+      mark_div: Number(memos[editIndex].mark_div),
+    };
+    updateMemoMutaion.mutate(newData);
     editClear();
   };
 
@@ -54,7 +56,10 @@ export const Modal: VFC = memo(() => {
         modal ? ' visible opacity-100' : 'invisible'
       }`}
     >
-      <input onClick={editClear} className='modal-bg absolute top-0 left-0 z-10 h-full w-full opacity-0' />
+      <input
+        onClick={editClear}
+        className='modal-bg absolute top-0 left-0 z-10 h-full w-full opacity-0'
+      />
       <div className='z-20 mx-auto flex w-11/12 max-w-2xl flex-col rounded-lg border border-gray-300 shadow-xl sm:w-5/6 lg:w-1/2'>
         <div className='flex flex-row justify-between rounded-tl-lg rounded-tr-lg border-b border-gray-200 bg-white p-6'>
           <p className='font-semibold text-gray-800'>Memo 編集</p>
@@ -66,7 +71,12 @@ export const Modal: VFC = memo(() => {
               viewBox='0 0 24 24'
               xmlns='http://www.w3.org/2000/svg'
             >
-              <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M6 18L18 6M6 6l12 12'>
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth='2'
+                d='M6 18L18 6M6 6l12 12'
+              >
                 {' '}
               </path>
             </svg>
@@ -123,7 +133,11 @@ export const Modal: VFC = memo(() => {
               className='rounded bg-slate-400 px-4 py-2 font-semibold text-white'
             />
 
-            <input type='submit' value='保存' className='rounded bg-blue-500 px-4 py-2 font-semibold text-white' />
+            <input
+              type='submit'
+              value='保存'
+              className='rounded bg-blue-500 px-4 py-2 font-semibold text-white'
+            />
           </div>
         </form>
       </div>
