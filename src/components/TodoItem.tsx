@@ -48,6 +48,8 @@ export const TodoItem: FC<Props> = memo((props) => {
     setModal(!modal);
   };
 
+  if (updateMemoMutation.isLoading || deleteMemoMutation.isLoading) return <Spinner />;
+
   return (
     <li className={`mb-2 w-full rounded ` + (mark_div ? ' bg-slate-200 opacity-60' : ' bg-white')}>
       <div className='ml-auto mr-auto flex w-[100%] flex-col'>
@@ -74,7 +76,7 @@ export const TodoItem: FC<Props> = memo((props) => {
               handleEdit(index);
             }}
             CustomTag={FaEdit}
-            // disable={updateLoading}
+            disable={updateMemoMutation.isLoading}
           />
           <ActionButton
             index={index}
@@ -83,7 +85,7 @@ export const TodoItem: FC<Props> = memo((props) => {
               handleComplete(id, title, category, description, date, Boolean(mark_div));
             }}
             CustomTag={FaCheck}
-            // disable={updateLoading}
+            disable={updateMemoMutation.isLoading}
           />
           <ActionButton
             index={index}
@@ -92,7 +94,7 @@ export const TodoItem: FC<Props> = memo((props) => {
               handleDelete(id);
             }}
             CustomTag={FaTrashAlt}
-            // disable={updateLoading || deleteLoading}
+            disable={updateMemoMutation.isLoading || deleteMemoMutation.isLoading}
           />
         </div>
       </div>
