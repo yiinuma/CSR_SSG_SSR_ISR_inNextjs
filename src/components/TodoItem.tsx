@@ -24,9 +24,7 @@ export const TodoItem: FC<Props> = memo((props) => {
   const { id, title, category, description, date, mark_div, index } = props;
   const [modal, setModal] = useRecoilState(modalState);
   const setEditIndex = useSetRecoilState(editIndexState);
-  const { updateMemoMutaion, deleteMemoMutaion, updateLoading, deleteLoading } = useMutateMemo();
-
-  if (updateLoading || deleteLoading) return <Spinner />;
+  const { updateMemoMutation, deleteMemoMutation } = useMutateMemo();
 
   const handleComplete = (
     id: string,
@@ -38,11 +36,11 @@ export const TodoItem: FC<Props> = memo((props) => {
   ) => {
     const completeChange = !complete;
     const newData = { id, title, category, description, date, mark_div: Number(completeChange) };
-    updateMemoMutaion.mutate(newData);
+    updateMemoMutation.mutate(newData);
   };
 
   const handleDelete = (id: string) => {
-    deleteMemoMutaion.mutate(id);
+    deleteMemoMutation.mutate(id);
   };
 
   const handleEdit = (index: number) => {
@@ -76,7 +74,7 @@ export const TodoItem: FC<Props> = memo((props) => {
               handleEdit(index);
             }}
             CustomTag={FaEdit}
-            disable={updateLoading}
+            // disable={updateLoading}
           />
           <ActionButton
             index={index}
@@ -85,7 +83,7 @@ export const TodoItem: FC<Props> = memo((props) => {
               handleComplete(id, title, category, description, date, Boolean(mark_div));
             }}
             CustomTag={FaCheck}
-            disable={updateLoading}
+            // disable={updateLoading}
           />
           <ActionButton
             index={index}
@@ -94,7 +92,7 @@ export const TodoItem: FC<Props> = memo((props) => {
               handleDelete(id);
             }}
             CustomTag={FaTrashAlt}
-            disable={updateLoading || deleteLoading}
+            // disable={updateLoading || deleteLoading}
           />
         </div>
       </div>

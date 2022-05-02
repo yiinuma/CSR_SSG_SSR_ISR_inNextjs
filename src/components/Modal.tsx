@@ -15,7 +15,7 @@ export const Modal: FC = memo(() => {
   const [editDescription, setEditDescription] = useState('');
   const [modal, setModal] = useRecoilState(modalState);
   const [editIndex, setEditIndex] = useRecoilState(editIndexState);
-  const { updateMemoMutaion, updateLoading } = useMutateMemo();
+  const { updateMemoMutation, updateLoading } = useMutateMemo();
   const { data: memos } = useQueryMemos();
 
   useEffect(() => {
@@ -45,7 +45,7 @@ export const Modal: FC = memo(() => {
       date: memos[editIndex].date,
       mark_div: Number(memos[editIndex].mark_div),
     };
-    updateMemoMutaion.mutate(newData);
+    updateMemoMutation.mutate(newData);
     editClear();
   };
 

@@ -11,7 +11,7 @@ export const InputForm: FC = memo(() => {
   const [category, setCategory] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [submitDisabled, setSubmitDisabled] = useState(true);
-  const { createMemoMutaion } = useMutateMemo();
+  const { createMemoMutation } = useMutateMemo();
 
   const getInputDay = () => {
     const inputDay = dayjs().format('YYYY/MM/DD');
@@ -22,7 +22,7 @@ export const InputForm: FC = memo(() => {
     e.preventDefault();
     const date = getInputDay();
     const complete = false;
-    createMemoMutaion.mutate({ title, category, description, date, mark_div: Number(complete) });
+    createMemoMutation.mutate({ title, category, description, date, mark_div: Number(complete) });
     setTitle('');
     setCategory('');
     setDescription('');

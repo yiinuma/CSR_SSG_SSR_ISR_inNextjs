@@ -13,62 +13,43 @@ export const useMutateMemo = () => {
   const [deleteLoading, setDeleteLoading] = useState<boolean>(false);
 
   // 何でもメモ新規登録
-  const createMemoMutaion = useMutation(
-    async (postData: CreateMemoType) => {
-      setCreateLoading(true);
-      const { data, status } = await loginInstance.post<MemoType>('/memo', postData);
-      if (status === 400 || status === 401) return;
-      return data;
-    },
+  const createMemoMutation = useMutation(
+    (postData: CreateMemoType) => loginInstance.post<MemoType>('/memo', postData),
     {
       onSuccess: (res, _) => {
         const previousMemos = queryClient.getQueryData<EditedMemoType[]>(['memos']);
         if (previousMemos) {
-          queryClient.setQueryData(['memos'], [...previousMemos, res]);
+          queryClient.setQueryData(['memos'], [...previousMemos, res.data]);
         }
-        setCreateLoading(false);
       },
       onError: (err: any) => {
-        setCreateLoading(false);
         alert(err.message);
       },
     },
   );
 
   // 何でもメモ更新
-  const updateMemoMutaion = useMutation(
-    async (putData: MemoType) => {
-      setUpdateLoading(true);
-      const { data, status } = await loginInstance.put<MemoType>(`/memo/${putData.id}`, putData);
-      if (status === 400 || status === 401) return;
-      return data;
-    },
+  const updateMemoMutation = useMutation(
+    (putData: MemoType) => loginInstance.put<MemoType>(`/memo/${putData.id}`, putData),
     {
       onSuccess: (res, variables) => {
         const previousMemos = queryClient.getQueryData<EditedMemoType[]>(['memos']);
         if (previousMemos) {
           queryClient.setQueryData(
             ['memos'],
-            previousMemos.map((memo) => (memo.id === variables.id ? res : memo)),
+            previousMemos.map((memo) => (memo.id === variables.id ? res.data : memo)),
           );
-          setUpdateLoading(false);
         }
       },
       onError: (err: any) => {
-        setUpdateLoading(false);
         alert(err.message);
       },
     },
   );
 
   // 何でもメモ削除
-  const deleteMemoMutaion = useMutation(
-    async (id: string) => {
-      setDeleteLoading(true);
-      const { data, status } = await loginInstance.delete<MemoType>(`/memo/${id}`);
-      if (status === 400 || status === 401) return;
-      return data;
-    },
+  const deleteMemoMutation = useMutation(
+    (id: string) => loginInstance.delete<MemoType>(`/memo/${id}`),
     {
       onSuccess: (_, variables) => {
         const previousMemos = queryClient.getQueryData<EditedMemoType[]>(['memos']);
@@ -78,19 +59,17 @@ export const useMutateMemo = () => {
             previousMemos.filter((memo) => memo.id !== variables),
           );
         }
-        setDeleteLoading(false);
       },
       onError: (err: any) => {
-        setDeleteLoading(false);
         alert(err.message);
       },
     },
   );
 
   return {
-    createMemoMutaion,
-    updateMemoMutaion,
-    deleteMemoMutaion,
+    createMemoMutation,
+    updateMemoMutation,
+    deleteMemoMutation,
     createLoading,
     updateLoading,
     deleteLoading,
