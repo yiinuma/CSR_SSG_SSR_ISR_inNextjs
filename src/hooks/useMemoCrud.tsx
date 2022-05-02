@@ -37,11 +37,18 @@ export const useMemoCrud = () => {
   // 何でもメモ新規登録
 
   const createMemoMutaion = useMutation(
-    async (data: CreateMemoType) => {
-      await loginInstance.post<CreateMemoType>('/memo', data);
+    async (pushData: CreateMemoType) => {
+      const { data } = await loginInstance.post('/memo', pushData);
+      return data;
     },
     {
-      onSuccess: () => {},
+      onSuccess: (res) => {
+        const previousTodos = queryClient.getQueryData<MemoType[]>(['memo']);
+
+        if (previousTodos) {
+          queryClient.setQueryData(['memo'], [...previousTodos, res[0]]);
+        }
+      },
       onError: (err: any) => {
         // alert(err.message);
       },

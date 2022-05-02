@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { axiosInstance } from 'lib/axiosInstance';
 import jwtDecode from 'jwt-decode';
 import { useRouter } from 'next/router';
@@ -24,6 +24,7 @@ export const useMutateAuth = () => {
   const router = useRouter();
   const setAuth = useSetRecoilState<boolean>(authState);
   const { loginInstance } = axiosInstance();
+  const queryClient = useQueryClient();
 
   const reset = () => {
     setEmail('');
@@ -59,8 +60,9 @@ export const useMutateAuth = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('exp');
     localStorage.setItem('auth', JSON.stringify(false));
+    queryClient.removeQueries(['memos']);
     router.push('/');
-  }, [router, setAuth]);
+  }, [queryClient, router, setAuth]);
 
   return {
     email,

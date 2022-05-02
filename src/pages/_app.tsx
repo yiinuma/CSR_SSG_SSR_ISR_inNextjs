@@ -2,6 +2,7 @@ import { RecoilRoot } from 'recoil';
 import type { AppProps } from 'next/app';
 import { Toaster } from 'react-hot-toast';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
 import '../styles/globals.css';
 
@@ -20,6 +21,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <Toaster position='top-center' />
         <Component {...pageProps} />
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </RecoilRoot>
   );
