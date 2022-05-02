@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import { EditedMemoType, MemoType } from 'types/memo';
+import { EditedMemoType } from 'types/memo';
 import { axiosInstance } from 'lib/axiosInstance';
 
 export const useQueryMemos = () => {

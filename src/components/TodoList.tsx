@@ -14,7 +14,7 @@ export const TodoList: FC = memo(() => {
   const [modal, setModal] = useRecoilState(modalState);
   const setEditIndex = useSetRecoilState(editIndexState);
   const { data: memos, status } = useQueryMemos();
-  const { updateMemoMutaion, deleteMemoMutaion } = useMutateMemo();
+  const { updateMemoMutaion, deleteMemoMutaion, updateLoading, deleteLoading } = useMutateMemo();
 
   if (status === 'loading') return <Spinner />;
   if (status === 'error') return <p>{'Error'}</p>;
@@ -42,7 +42,7 @@ export const TodoList: FC = memo(() => {
   };
 
   return (
-    <ul className='todo-list mt-8 w-full'>
+    <ul className='todo-list relative z-0 mt-8 w-full'>
       {memos &&
         memos.map((list, index) => (
           <li
@@ -78,7 +78,7 @@ export const TodoList: FC = memo(() => {
                     handleEdit(index);
                   }}
                   CustomTag={FaEdit}
-                  // disable={readLoading || updateLoading}
+                  disable={updateLoading}
                 />
                 <ActionButton
                   index={index}
@@ -94,7 +94,7 @@ export const TodoList: FC = memo(() => {
                     );
                   }}
                   CustomTag={FaCheck}
-                  // disable={readLoading || updateLoading}
+                  disable={updateLoading}
                 />
                 <ActionButton
                   index={index}
@@ -103,7 +103,7 @@ export const TodoList: FC = memo(() => {
                     handleDelete(list.id);
                   }}
                   CustomTag={FaTrashAlt}
-                  // disable={readLoading || updateLoading || deleteLoading}
+                  disable={updateLoading || deleteLoading}
                 />
               </div>
             </div>
