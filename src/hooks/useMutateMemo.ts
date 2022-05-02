@@ -14,9 +14,9 @@ export const useMutateMemo = () => {
 
   // 何でもメモ新規登録
   const createMemoMutaion = useMutation(
-    async (pushData: CreateMemoType) => {
+    async (postData: CreateMemoType) => {
       setCreateLoading(true);
-      const { data, status } = await loginInstance.post('/memo', pushData);
+      const { data, status } = await loginInstance.post('/memo', postData);
       if (status === 400 || status === 401) return;
       return data;
     },
@@ -37,9 +37,9 @@ export const useMutateMemo = () => {
 
   // 何でもメモ更新
   const updateMemoMutaion = useMutation(
-    async (pushData: MemoType) => {
+    async (putData: MemoType) => {
       setUpdateLoading(true);
-      const { data, status } = await loginInstance.put(`/memo/${pushData.id}`, pushData);
+      const { data, status } = await loginInstance.put(`/memo/${putData.id}`, putData);
       if (status === 400 || status === 401) return;
       return data;
     },
