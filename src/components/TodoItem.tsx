@@ -7,7 +7,6 @@ import { modalState } from 'store/modalState';
 import { ActionButton } from 'components/button/ActionButton';
 import { editIndexState } from 'store/indexState';
 import { useMutateMemo } from 'hooks/useMutateMemo';
-import { useQueryMemos } from 'hooks/useQueryMemos';
 import { Spinner } from 'components/Spinner';
 
 type Props = {

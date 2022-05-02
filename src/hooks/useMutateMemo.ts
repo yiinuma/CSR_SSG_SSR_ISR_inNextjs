@@ -8,9 +8,6 @@ import { useState } from 'react';
 export const useMutateMemo = () => {
   const { loginInstance } = axiosInstance();
   const queryClient = useQueryClient();
-  const [createLoading, setCreateLoading] = useState<boolean>(false);
-  const [updateLoading, setUpdateLoading] = useState<boolean>(false);
-  const [deleteLoading, setDeleteLoading] = useState<boolean>(false);
 
   // 何でもメモ新規登録
   const createMemoMutation = useMutation(
@@ -70,8 +67,5 @@ export const useMutateMemo = () => {
     createMemoMutation,
     updateMemoMutation,
     deleteMemoMutation,
-    createLoading,
-    updateLoading,
-    deleteLoading,
   };
 };
