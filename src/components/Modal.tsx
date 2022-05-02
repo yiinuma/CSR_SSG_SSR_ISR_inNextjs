@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 import { memo, useEffect, useState, FC } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 
 import { editIndexState } from 'store/indexState';
 import { modalState } from 'store/modalState';
@@ -15,7 +15,7 @@ export const Modal: FC = memo(() => {
   const [editDescription, setEditDescription] = useState('');
   const [modal, setModal] = useRecoilState(modalState);
   const [editIndex, setEditIndex] = useRecoilState(editIndexState);
-  const { updateMemoMutaion } = useMutateMemo();
+  const { updateMemoMutaion, updateLoading } = useMutateMemo();
   const { data: memos } = useQueryMemos();
 
   useEffect(() => {
