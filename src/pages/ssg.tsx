@@ -17,14 +17,12 @@ type Props = {
 };
 
 const Ssg: NextPage<Props> = ({ imgUrl }) => {
-  console.log(imgUrl);
   return (
     <>
-      <Layout>
-        <p className='my-5 text-xl font-bold'>SSG Test Page</p>
+      <Layout title='SSG Test Page'>
         <MainLayout>
-          <div>
-            <Image src={imgUrl} width={320} height={240} alt='dogs' objectFit='contain' />
+          <div className='flex justify-center'>
+            <Image src={imgUrl} width={320} height={240} alt='dogs' objectFit='cover' />
           </div>
         </MainLayout>
       </Layout>

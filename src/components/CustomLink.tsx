@@ -15,7 +15,7 @@ export const CustomLink: FC<Props> = memo((props) => {
   const auth = useRecoilValue<boolean>(authState);
 
   return (
-    <Link href={href}>
+    <Link href={href} prefetch={false}>
       <a className='rounded px-3 py-2 text-white  hover:bg-primary-500'>{children}</a>
     </Link>
   );
