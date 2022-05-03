@@ -3,7 +3,6 @@ import { useMutation, useQueryClient } from 'react-query';
 
 import { axiosInstance } from 'lib/axiosInstance';
 import { CreateMemoType, EditedMemoType, MemoType } from 'types/memo';
-import { useState } from 'react';
 
 export const useMutateMemo = () => {
   const { loginInstance } = axiosInstance();
@@ -27,7 +26,7 @@ export const useMutateMemo = () => {
 
   // 何でもメモ更新
   const updateMemoMutation = useMutation(
-    (putData: MemoType) => loginInstance.put<MemoType[]>(`/memo/${putData.id}`, putData),
+    (putData: MemoType) => loginInstance.patch<MemoType[]>(`/memo/${putData.id}`, putData),
     {
       onSuccess: (res, variables) => {
         const previousMemos = queryClient.getQueryData<EditedMemoType[]>('memos');
