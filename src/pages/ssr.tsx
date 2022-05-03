@@ -1,11 +1,11 @@
-import { GetStaticProps, NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 import Image from 'next/image';
 
 import { Layout } from 'components/Layout/Layout';
 import { MainLayout } from 'components/Layout/MainLayout';
 
-export const getStaticProps: GetStaticProps = async () => {
-  console.log('getStaticProps/ssg invoked');
+export const getServerSideProps: GetServerSideProps = async () => {
+  console.log('getServerSideProps/ssr invoked');
   const url = 'https://dog.ceo/api/breeds/image/random';
   const response = await fetch(url);
   const jsonObj = await response.json();
@@ -16,10 +16,10 @@ type Props = {
   imgUrl: string;
 };
 
-const Ssg: NextPage<Props> = ({ imgUrl }) => {
+const Ssr: NextPage<Props> = ({ imgUrl }) => {
   return (
     <>
-      <Layout title='SSG Test Page'>
+      <Layout title='SSR Test Page'>
         <MainLayout>
           <div className='flex justify-center'>
             <Image src={imgUrl} width={480} height={320} alt='dogs' objectFit='cover' />
@@ -29,4 +29,4 @@ const Ssg: NextPage<Props> = ({ imgUrl }) => {
     </>
   );
 };
-export default Ssg;
+export default Ssr;

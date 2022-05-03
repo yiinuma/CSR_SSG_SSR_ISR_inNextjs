@@ -8,8 +8,7 @@ export const Page404 = () => {
 
   return (
     <>
-      <Layout>
-        <p className='mb-4 font-bold'>404 -Page Not Found!!</p>
+      <Layout title='404 -Page Not Found!!'>
         <PrimaryButton onClick={() => router.push('/')}>Home</PrimaryButton>
       </Layout>
     </>

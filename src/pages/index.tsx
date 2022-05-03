@@ -33,8 +33,7 @@ const Home: NextPage = () => {
   }, []);
 
   return (
-    <Layout>
-      <p className='my-5 text-xl font-bold'>CSR_SSG_SSR_ISR Test Page</p>
+    <Layout title='CSR_SSG_SSR_ISR Test Page<'>
       <figure className='mt-4 flex'>
         <div className='border-1 relative m-auto w-full max-w-md rounded-xl bg-white py-10 px-1 shadow-lg'>
           {!auth ? (
