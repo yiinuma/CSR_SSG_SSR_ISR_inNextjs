@@ -11,6 +11,7 @@ export const Navbar = () => {
           <CustomLink href='/ssg'>SSG</CustomLink>
           <CustomLink href='/ssr'>SSR</CustomLink>
           <CustomLink href='/isr'>ISR</CustomLink>
+          <CustomLink href='/csr'>SSG+CSF</CustomLink>
         </div>
       </div>
     </nav>
