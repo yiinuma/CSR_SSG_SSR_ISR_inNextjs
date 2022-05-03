@@ -16,14 +16,7 @@ export const CustomLink: FC<Props> = memo((props) => {
 
   return (
     <Link href={href}>
-      <a
-        className={
-          `rounded px-3 py-2 hover:bg-primary-500` +
-          (auth ? ` text-white` : ` pointer-events-none text-primary-800`)
-        }
-      >
-        {children}
-      </a>
+      <a className='rounded px-3 py-2 text-white  hover:bg-primary-500'>{children}</a>
     </Link>
   );
 });
