@@ -46,6 +46,7 @@ export const useMutateAuth = () => {
     },
     {
       onSuccess: () => {
+        router.push('memo-app');
         reset();
       },
       onError: (err: any) => {
