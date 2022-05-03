@@ -1,49 +1,46 @@
 /* eslint-disable react/display-name */
 import { memo, useEffect, useState, FC } from 'react';
-import { useRecoilState } from 'recoil';
 
-import { editIndexState } from 'store/indexState';
-import { modalState } from 'store/modalState';
 import { ModalInput } from 'components/input/ModalInput';
 import { InputField } from 'components/InputField';
 import { useMutateMemo } from 'hooks/useMutateMemo';
 import { useQueryMemos } from 'hooks/useQueryMemos';
+import { useEdited } from 'hooks/useEdited';
 
 export const Modal: FC = memo(() => {
   const [editTitle, setEditTitle] = useState('');
   const [editCategory, setEditCategory] = useState('');
   const [editDescription, setEditDescription] = useState('');
-  const [modal, setModal] = useRecoilState(modalState);
-  const [editIndex, setEditIndex] = useRecoilState(editIndexState);
+  const { editedModal, setEditedModalState, editedIndex, setEditedIndexState } = useEdited();
   const { updateMemoMutation } = useMutateMemo();
   const { data: memos } = useQueryMemos();
 
   useEffect(() => {
-    if (editIndex !== null && memos) {
-      setEditTitle(memos[editIndex].title);
-      setEditCategory(memos[editIndex].category);
-      setEditDescription(memos[editIndex].description);
+    if (editedIndex !== null && memos) {
+      setEditTitle(memos[editedIndex].title);
+      setEditCategory(memos[editedIndex].category);
+      setEditDescription(memos[editedIndex].description);
     }
-  }, [editIndex, memos]);
+  }, [editedIndex, memos]);
 
   const editClear = () => {
-    setModal(false);
+    setEditedModalState(false);
+    setEditedIndexState(null);
     setEditTitle('');
     setEditCategory('');
     setEditDescription('');
-    setEditIndex(null);
   };
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    if (editIndex === null || memos === undefined) return;
+    if (editedIndex === null || memos === undefined) return;
     const newData = {
-      id: memos[editIndex].id,
+      id: memos[editedIndex].id,
       title: editTitle,
       category: editCategory,
       description: editDescription,
-      date: memos[editIndex].date,
-      mark_div: Number(memos[editIndex].mark_div),
+      date: memos[editedIndex].date,
+      mark_div: Number(memos[editedIndex].mark_div),
     };
     updateMemoMutation.mutate(newData);
     editClear();
@@ -53,7 +50,7 @@ export const Modal: FC = memo(() => {
     <div
       id='modal'
       className={`fixed top-0 left-0 flex h-screen w-screen items-center justify-center bg-slate-500 bg-opacity-75 antialiased opacity-0 transition duration-300 ease-in-out ${
-        modal ? ' visible opacity-100' : 'invisible'
+        editedModal ? ' visible opacity-100' : 'invisible'
       }`}
     >
       <input

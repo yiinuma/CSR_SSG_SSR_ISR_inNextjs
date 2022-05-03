@@ -1,13 +1,11 @@
 /* eslint-disable react/display-name */
 import { memo, FC } from 'react';
 import { FaEdit, FaCheck, FaTrashAlt } from 'react-icons/fa';
-import { useRecoilState, useSetRecoilState } from 'recoil';
 
-import { modalState } from 'store/modalState';
-import { ActionButton } from 'components/button/ActionButton';
-import { editIndexState } from 'store/indexState';
-import { useMutateMemo } from 'hooks/useMutateMemo';
 import { Spinner } from 'components/Spinner';
+import { ActionButton } from 'components/button/ActionButton';
+import { useMutateMemo } from 'hooks/useMutateMemo';
+import { useEdited } from 'hooks/useEdited';
 
 type Props = {
   index: number;
@@ -21,8 +19,7 @@ type Props = {
 
 export const TodoItem: FC<Props> = memo((props) => {
   const { id, title, category, description, date, mark_div, index } = props;
-  const [modal, setModal] = useRecoilState(modalState);
-  const setEditIndex = useSetRecoilState(editIndexState);
+  const { editedModal, setEditedModalState, setEditedIndexState } = useEdited();
   const { updateMemoMutation, deleteMemoMutation } = useMutateMemo();
 
   const handleComplete = (
@@ -43,8 +40,8 @@ export const TodoItem: FC<Props> = memo((props) => {
   };
 
   const handleEdit = (index: number) => {
-    setEditIndex(index);
-    setModal(!modal);
+    setEditedIndexState(index);
+    setEditedModalState(!editedModal);
   };
 
   if (updateMemoMutation.isLoading || deleteMemoMutation.isLoading) return <Spinner />;
