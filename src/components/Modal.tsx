@@ -3,6 +3,7 @@ import { memo, useEffect, useState, FC } from 'react';
 
 import { ModalInput } from 'components/input/ModalInput';
 import { InputField } from 'components/InputField';
+import { Spinner } from 'components/Spinner';
 import { useMutateMemo } from 'hooks/useMutateMemo';
 import { useQueryMemos } from 'hooks/useQueryMemos';
 import { useEdited } from 'hooks/useEdited';
@@ -13,7 +14,7 @@ export const Modal: FC = memo(() => {
   const [editDescription, setEditDescription] = useState('');
   const { editedModal, setEditedModalState, editedIndex, setEditedIndexState } = useEdited();
   const { updateMemoMutation } = useMutateMemo();
-  const { data: memos } = useQueryMemos();
+  const { data: memos, status } = useQueryMemos();
 
   useEffect(() => {
     if (editedIndex !== null && memos) {
@@ -22,6 +23,8 @@ export const Modal: FC = memo(() => {
       setEditDescription(memos[editedIndex].description);
     }
   }, [editedIndex, memos]);
+
+  if (status === 'error') return <p>{'Error'}</p>;
 
   const editClear = () => {
     setEditedModalState(false);
