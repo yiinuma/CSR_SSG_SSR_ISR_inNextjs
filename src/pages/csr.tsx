@@ -4,7 +4,6 @@ import Image from 'next/image';
 import { Layout } from 'components/Layout/Layout';
 import { MainLayout } from 'components/Layout/MainLayout';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 
 const Csr: NextPage = () => {
   const [img, setImg] = useState<string>('');
