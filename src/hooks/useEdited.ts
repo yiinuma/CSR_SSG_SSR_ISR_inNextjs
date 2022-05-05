@@ -1,11 +1,11 @@
 import { atom, useRecoilState } from 'recoil';
 
-export const modalState = atom({
+const modalState = atom({
   key: 'atomModalState',
   default: false,
 });
 
-export const editIndexState = atom<number | null>({
+const editIndexState = atom<number | null>({
   key: 'atomEditIndexState',
   default: null,
 });
