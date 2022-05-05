@@ -33,19 +33,19 @@ export const useMutateAuth = () => {
 
   const loginMutation = useMutation(
     async () => {
-      const { data, status } = await loginInstance.post<AxiosType>('login', {
+      const { data } = await loginInstance.post('login', {
         email,
         password,
       });
-      if (status === 401) return;
-      const decodedToken = jwtDecode<AxiosExpType>(data.access_token);
-      localStorage.setItem('auth', JSON.stringify(true));
-      localStorage.setItem('token', data.access_token);
-      localStorage.setItem('exp', JSON.stringify(decodedToken.exp));
-      setAuth(true);
+      return data;
     },
     {
-      onSuccess: () => {
+      onSuccess: (data) => {
+        const decodedToken = jwtDecode<AxiosExpType>(data.access_token);
+        localStorage.setItem('auth', JSON.stringify(true));
+        localStorage.setItem('token', data.access_token);
+        localStorage.setItem('exp', JSON.stringify(decodedToken.exp));
+        setAuth(true);
         router.push('memo-app');
         reset();
       },
