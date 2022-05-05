@@ -11,7 +11,7 @@ export const Layout: FC<Props> = memo((props) => {
   const { title, children } = props;
 
   return (
-    <div className='flex h-screen flex-col items-center justify-center bg-slate-50 font-mono text-gray-600'>
+    <div className='flex min-h-screen flex-col items-center justify-center bg-slate-50 font-mono text-gray-600'>
       <Navbar />
 
       <div className='flex w-screen flex-1 flex-col items-center justify-center'>
