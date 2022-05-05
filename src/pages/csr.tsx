@@ -26,7 +26,7 @@ const Csr: NextPage = () => {
       <Layout title='CSR(SSG + CSF) Test Page'>
         <MainLayout>
           <div className='flex justify-center'>
-            <Image src={img} width={480} height={320} alt='dogs' objectFit='cover' />
+            {img && <Image src={img} width={480} height={320} alt='dogs' objectFit='cover' />}
           </div>
         </MainLayout>
       </Layout>
