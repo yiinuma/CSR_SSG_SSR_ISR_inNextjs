@@ -33,7 +33,7 @@ export const useMutateAuth = () => {
 
   const loginMutation = useMutation(
     async () => {
-      const { data } = await loginInstance.post('login', {
+      const { data } = await loginInstance.post<AxiosType>('login', {
         email,
         password,
       });
