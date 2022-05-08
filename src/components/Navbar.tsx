@@ -23,6 +23,9 @@ export const Navbar = () => {
           <CustomLink href='/csr' testId='csr'>
             SSG+CSF
           </CustomLink>
+          <CustomLink href='/blog-page' testId='blog'>
+            Blog
+          </CustomLink>
         </div>
       </div>
     </nav>
