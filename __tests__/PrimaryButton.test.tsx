@@ -5,15 +5,14 @@ import { PrimaryButton } from 'components/button/PrimaryButton';
 describe('PrimaryButton Test', () => {
   afterEach(() => cleanup());
   it('render', () => {
-    render(<PrimaryButton>テスト</PrimaryButton>);
+    render(<PrimaryButton>Test</PrimaryButton>);
     expect(screen.getByRole('button')).toBeTruthy;
   });
   // ボタン押下時に関数が実行されること
   it('ボタン押下時に関数実行', () => {
     const clickFn = jest.fn();
     render(<PrimaryButton onClick={clickFn}>Test</PrimaryButton>);
-    const button = screen.getByRole('button');
-    fireEvent.click(button);
+    fireEvent.click(screen.getByRole('button'));
     expect(clickFn).toHaveBeenCalledTimes(1);
   });
 });
