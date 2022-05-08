@@ -84,6 +84,6 @@ describe(`Blog detail page`, () => {
     render(page);
     await screen.findByText('dummy title 2');
     userEvent.click(screen.getByTestId('back-blog'));
-    expect(await screen.findByRole('heading')).toBeInTheDocument();
+    expect(await screen.findByText('Blog')).toBeInTheDocument();
   });
 });
