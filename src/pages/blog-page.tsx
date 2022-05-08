@@ -1,9 +1,9 @@
 import { GetStaticProps } from 'next';
 
 import { Layout } from 'components/Layout/Layout';
-import { getAllPostsData } from 'lib/jsonPlaceFetch';
-import { POST } from 'types/jsonPlace';
 import { JsonPost } from 'components/JsonPost';
+import { getAllPostsData } from 'lib/jsonPlaceFetch';
+import { POST } from 'types/jsonPlaceHolder';
 
 type Props = {
   posts: POST[];

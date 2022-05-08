@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import { POST } from 'types/jsonPlace';
+import { POST } from 'types/jsonPlaceHolder';
 
 export const getAllPostsData = async () => {
   const res = await fetch(new URL('https://jsonplaceholder.typicode.com/posts/?_limit=10'));

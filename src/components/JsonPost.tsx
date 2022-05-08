@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { POST } from 'types/jsonPlace';
+import { POST } from 'types/jsonPlaceHolder';
 
 export const JsonPost: React.FC<POST> = ({ id, title }) => {
   return (
