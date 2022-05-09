@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom/extend-expect';
-import { render, screen, cleanup } from '@testing-library/react';
+import { render, screen, cleanup, fireEvent } from '@testing-library/react';
 import { getPage } from 'next-page-tester';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
@@ -79,7 +79,7 @@ describe(`Blog detail page`, () => {
     });
     render(page);
     await screen.findByText('dummy title 2');
-    userEvent.click(screen.getByTestId('back-blog'));
+    fireEvent.click(screen.getByTestId('back-blog'));
     expect(await screen.findByText('Blog Test Page')).toBeInTheDocument();
   });
 });
