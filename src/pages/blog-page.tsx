@@ -18,7 +18,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 const BlogPage: React.FC<Props> = ({ posts }) => {
   return (
-    <Layout title='Blog'>
+    <Layout title='Blog Test Page'>
       <ul>{posts && posts.map((post) => <JsonPost key={post.id} {...post} />)}</ul>
     </Layout>
   );

@@ -39,7 +39,7 @@ describe(`Blog page`, () => {
       route: '/blog-page',
     });
     render(page);
-    expect(await screen.findByRole('heading')).toBeInTheDocument();
+    expect(await screen.findByText('Blog Test Page')).toBeInTheDocument();
     expect(screen.getByText('dummy title 1')).toBeInTheDocument();
     expect(screen.getByText('dummy title 2')).toBeInTheDocument();
   });
