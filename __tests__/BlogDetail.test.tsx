@@ -3,7 +3,6 @@ import { render, screen, cleanup, fireEvent } from '@testing-library/react';
 import { getPage } from 'next-page-tester';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import userEvent from '@testing-library/user-event';
 
 const server = setupServer(
   rest.get('https://jsonplaceholder.typicode.com/posts/', (_req, res, ctx) => {
@@ -59,7 +58,7 @@ afterAll(() => server.close());
 describe(`Blog detail page`, () => {
   it('render Blog detail page ID 1', async () => {
     const { page } = await getPage({
-      route: '/posts/1',
+      route: '/blog/1',
     });
     render(page);
     expect(await screen.findByText('dummy title 1')).toBeInTheDocument();
@@ -67,7 +66,7 @@ describe(`Blog detail page`, () => {
   });
   it('render Blog detail page ID 2', async () => {
     const { page } = await getPage({
-      route: '/posts/2',
+      route: '/blog/2',
     });
     render(page);
     expect(await screen.findByText('dummy title 2')).toBeInTheDocument();
@@ -75,7 +74,7 @@ describe(`Blog detail page`, () => {
   });
   it('back to Blog page from Blog detail page', async () => {
     const { page } = await getPage({
-      route: '/posts/2',
+      route: '/blog/2',
     });
     render(page);
     await screen.findByText('dummy title 2');

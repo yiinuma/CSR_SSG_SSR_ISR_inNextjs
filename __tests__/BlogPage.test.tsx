@@ -36,7 +36,7 @@ afterAll(() => server.close());
 describe(`Blog page`, () => {
   it('pre-fetched by getStaticProps', async () => {
     const { page } = await getPage({
-      route: '/blog-page',
+      route: '/blog',
     });
     render(page);
     expect(await screen.findByText('Blog Test Page')).toBeInTheDocument();

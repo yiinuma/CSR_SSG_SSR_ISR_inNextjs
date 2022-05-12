@@ -27,7 +27,7 @@ const PostDetail: React.FC<POST> = ({ id, title, body }) => {
     <Layout title={title}>
       <p className='m-4'>ID : {id}</p>
       <p className='mx-10 mb-12'>{body}</p>
-      <Link href='/blog-page'>
+      <Link href='/blog'>
         <a className='mt-12 flex cursor-pointer' data-testid='back-blog'>
           👈 Back to blog-page
         </a>
