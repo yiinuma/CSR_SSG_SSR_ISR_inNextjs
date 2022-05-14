@@ -12,5 +12,5 @@ export default {
 type Story = ComponentStoryObj<typeof PrimaryButton>;
 
 export const Default: Story = {
-  args: { children: 'Primary', onClick: action('clicked') },
+  args: { children: 'Primary', onClick: action('clicked!') },
 };
