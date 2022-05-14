@@ -4,7 +4,7 @@ const nextConfig = {
   images: {
     domains: ['images.dog.ceo', 'cdn.shibe.online'],
   },
-  swcMinify: true,
+  // swcMinify: true,
 };
 
 module.exports = nextConfig;
