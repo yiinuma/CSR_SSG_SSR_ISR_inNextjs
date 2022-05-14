@@ -1,3 +1,4 @@
+import { action } from '@storybook/addon-actions';
 import type { ComponentMeta, ComponentStoryObj } from '@storybook/react';
 
 import { PrimaryButton } from './PrimaryButton';
@@ -11,5 +12,5 @@ export default {
 type Story = ComponentStoryObj<typeof PrimaryButton>;
 
 export const Default: Story = {
-  args: { children: 'Primary' },
+  args: { children: 'Primary', onClick: action('clicked') },
 };
