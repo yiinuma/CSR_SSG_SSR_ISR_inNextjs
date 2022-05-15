@@ -1,6 +1,6 @@
-import { VFC } from 'react';
+import { FC } from 'react';
 
-type Props = {
+export type FormInputProps = {
   id: string;
   required: boolean;
   type: string;
@@ -8,7 +8,7 @@ type Props = {
   onChange: React.ChangeEventHandler<HTMLInputElement>;
 };
 
-export const FormInput: VFC<Props> = (props) => {
+export const FormInput: FC<FormInputProps> = (props) => {
   const { id, type, value, onChange, required } = props;
   return (
     <input
