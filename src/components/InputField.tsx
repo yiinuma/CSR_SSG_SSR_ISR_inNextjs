@@ -1,6 +1,6 @@
 import { ReactNode, FC } from 'react';
 
-type Props = {
+export type Props = {
   htmlFor: string;
   label: string;
   children: ReactNode;

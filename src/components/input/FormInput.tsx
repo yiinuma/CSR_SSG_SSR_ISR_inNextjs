@@ -5,7 +5,7 @@ export type FormInputProps = {
   required: boolean;
   type: string;
   value: string;
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
 };
 
 export const FormInput: FC<FormInputProps> = (props) => {

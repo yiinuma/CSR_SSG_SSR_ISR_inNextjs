@@ -15,7 +15,7 @@ const defaultInput: FormInputProps = {
   id: 'category',
   required: false,
   type: 'text',
-  value: 'category',
+  value: '',
   onChange: action('clicked!'),
 };
 
