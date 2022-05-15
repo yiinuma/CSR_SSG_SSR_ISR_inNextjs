@@ -15,7 +15,7 @@ type Story = ComponentStoryObj<typeof CustomLink>;
 export const Default: Story = {
   args: { href: '/', testId: 'home' },
   render: (args) => (
-    <nav className='max-w-fit bg-primary-600 px-6 font-mono'>
+    <nav className='max-w-fit bg-primary-600 px-8 font-mono'>
       <div className='flex h-12 items-center'>
         <div className='flex space-x-1 text-sm'>
           <CustomLink {...args}>Home</CustomLink>
