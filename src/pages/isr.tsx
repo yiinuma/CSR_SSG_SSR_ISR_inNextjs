@@ -1,8 +1,8 @@
 import { GetStaticProps, NextPage } from 'next';
 import Image from 'next/image';
 
-import { Layout } from 'components/Layout/Layout';
-import { MainLayout } from 'components/Layout/MainLayout';
+import { Layout } from 'components/uiParts/Layout/Layout';
+import { MainLayout } from 'components/uiParts/Layout/MainLayout';
 
 export const getStaticProps: GetStaticProps = async () => {
   console.log('getStaticProps/ISR invoked');

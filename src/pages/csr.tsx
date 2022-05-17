@@ -1,8 +1,8 @@
 import { NextPage } from 'next';
 import Image from 'next/image';
 
-import { Layout } from 'components/Layout/Layout';
-import { MainLayout } from 'components/Layout/MainLayout';
+import { Layout } from 'components/uiParts/Layout/Layout';
+import { MainLayout } from 'components/uiParts/Layout/MainLayout';
 import { useEffect, useState } from 'react';
 
 const Csr: NextPage = () => {

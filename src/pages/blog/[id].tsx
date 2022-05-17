@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { GetStaticProps, GetStaticPaths } from 'next';
 
-import { Layout } from 'components/Layout/Layout';
+import { Layout } from 'components/uiParts/Layout/Layout';
 import { POST } from 'types/jsonPlaceHolder';
 import { getAllPostIds, getPostData } from 'lib/jsonPlaceFetch';
 

@@ -1,6 +1,6 @@
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 
-import { PrimaryButton } from 'components/button/PrimaryButton';
+import { PrimaryButton } from 'components/uiParts/button/PrimaryButton';
 
 describe('PrimaryButton Test', () => {
   afterEach(() => cleanup());

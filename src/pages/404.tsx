@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 
-import { Layout } from 'components/Layout/Layout';
-import { PrimaryButton } from 'components/button/PrimaryButton';
+import { Layout } from 'components/uiParts/Layout/Layout';
+import { PrimaryButton } from 'components/uiParts/button/PrimaryButton';
 
 export const Page404 = () => {
   const router = useRouter();

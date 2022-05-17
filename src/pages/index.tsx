@@ -1,13 +1,13 @@
 import { NextPage } from 'next';
 import { FormEvent, useEffect } from 'react';
 
-import { Layout } from 'components/Layout/Layout';
-import { LoginInput } from 'components/input/LoginInput';
-import { InputField } from 'components/InputField';
+import { Layout } from 'components/uiParts/Layout/Layout';
+import { LoginInput } from 'components/uiParts/input/LoginInput';
+import { InputField } from 'components/uiParts/input/inputField';
 import { useMutateAuth } from 'hooks/useMutateAuth';
 import { useRecoilState } from 'recoil';
 import { authState } from 'store/authState';
-import { PrimaryButton } from 'components/button/PrimaryButton';
+import { PrimaryButton } from 'components/uiParts/button/PrimaryButton';
 import { useRouter } from 'next/router';
 
 const Home: NextPage = () => {

@@ -3,13 +3,13 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 
-import { Layout } from 'components/Layout/Layout';
+import { Layout } from 'components/uiParts/Layout/Layout';
 import { authState } from 'store/authState';
-import { MainLayout } from 'components/Layout/MainLayout';
-import { InputForm } from 'components/InputForm';
-import { TodoList } from 'components/TodoList';
-import { Modal } from 'components/Modal';
-import { PrimaryButton } from 'components/button/PrimaryButton';
+import { MainLayout } from 'components/uiParts/Layout/MainLayout';
+import { InputForm } from 'components/pages/memo-app/InputForm';
+import { TodoList } from 'components/pages/memo-app/TodoList';
+import { Modal } from 'components/pages/memo-app/Modal';
+import { PrimaryButton } from 'components/uiParts/button/PrimaryButton';
 import { useMutateAuth } from 'hooks/useMutateAuth';
 
 const MemoApp: NextPage = () => {
