@@ -1,9 +1,9 @@
 /* eslint-disable react/display-name */
 import { memo, FC } from 'react';
 
-import { useQueryMemos } from 'hooks/useQueryMemos';
 import { Spinner } from 'components/uiParts/Spinner';
-import { TodoItem } from 'components/pages/memo-app/Todoitem';
+import { TodoItem } from 'components/specificPage/memo-app/Todoitem';
+import { useQueryMemos } from 'hooks/useQueryMemos';
 
 export const TodoList: FC = memo(() => {
   const { data: memos, status } = useQueryMemos();

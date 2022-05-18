@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next';
 
 import { Layout } from 'components/uiParts/Layout/Layout';
-import { JsonPost } from 'components/pages/blog/JsonPost';
+import { JsonPost } from 'components/specificPage/blog/JsonPost';
 import { getAllPostsData } from 'lib/jsonPlaceFetch';
 import { POST } from 'types/jsonPlaceHolder';
 
